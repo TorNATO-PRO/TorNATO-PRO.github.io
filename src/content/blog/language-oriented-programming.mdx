@@ -42,7 +42,7 @@ class Functor f where
   map :: forall a b. (a -> b) -> f a -> f b
 ```
 
-Basically, a functor denotes a type that can be mapped. For example, lists are functors and can me mapped, as
+Basically, a Functor denotes a type that can be mapped. For example, lists are functors and can me mapped, as
 can trees.
 
 ### Apply
@@ -181,4 +181,30 @@ Such a function takes a `String` and could launch nuclear missiles at Russia, re
 non-deterministic nature of the computation. We need something less powerful but more pragmatic.
 
 ## Enter Free Monads
+
+So how do we encode side effects at the type level, in the type signature of a function, encoding effects as data and with custom interpreters? To accomplish this we employ a powerful algebraic structure known as a the [Free Monad](https://serokell.io/blog/introduction-to-free-monads),
+where any Functor (see earlier) can be lifted into the Free Monad. Lets explore a simple embedded Domain Specific Language (eDSL) using the Free Monad in Haskell.
+
+What do we want to do in our simple language? Well, we want to do the following
+
+- GET the contents of this webpage
+- Log the contents to the console
+- Get the current date
+- Save the contents to a file with the current date
+
+Lets use [Serokell's definition](https://serokell.io/blog/introduction-to-free-monads) of the Free Monad in our example (although far more efficient implementations exist) for simplicities sake.
+
+```hs
+data AppActions
+  = GetNathanBlogPage String (Either String String -> a)
+  | ConsoleLog String a
+  | GetDate (Day -> a)
+  | SaveContents Day String a
+  deriving (Functor)
+```
+
+
+
+
+
 
