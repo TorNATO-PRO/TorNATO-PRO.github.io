@@ -173,5 +173,12 @@ laws. There will be a quiz on all of these laws!
 
 When I talk about side effects, I mostly mean stuff like non-deterministic computations, mutable references, getting user input, making REST calls,
 spawning multiple threads, deleting System32, transmitting nuclear codes. Functions that have the potential to fail or have behavior that is not "referentially transparent" when called subsequently.
-Some common Monads for this kind of thing are `IO` in Haskell, or `Effect` and `Aff` in PureScript.
+Some common Monads for this kind of thing are `IO` in Haskell, or `Effect` and `Aff` in PureScript, where a [thunk](https://en.wikipedia.org/wiki/Thunk) of effects is built up waiting to be [evaluated](https://github.com/purescript-contrib/purescript-aff/blob/main/src/Effect/Aff.js).
+I highly recommend checking out [Haskell/Understanding monads/IO](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/IO) as a supplementary read.
+
+However, the problem with these Monads is that they try to become all encompassing. By reading the type signature of a function of type `String -> IO String`, you have no idea what it is capable of.
+Such a function takes a `String` and could launch nuclear missiles at Russia, returning a `IO String` with Putin's response. It is also very hard to mock and write tests for due to the potential
+non-deterministic nature of the computation. We need something less powerful but more pragmatic.
+
+## Enter Free Monads
 
