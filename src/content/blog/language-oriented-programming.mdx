@@ -166,11 +166,12 @@ Bind builds on top of applicative and basically means that we can sequence compu
 class (Applicative m, Bind m) <= Monad m
 ```
 
-Finally we get to what a Monad is. As you can see it builds on top of `Applicative` and `Bind`. There will be a
-quiz on all of these laws!
+Finally we get to what a Monad is. As you can see it builds on top of `Applicative` and `Bind` and adds a few additional
+laws. There will be a quiz on all of these laws!
 
+## Monads for Side Effects
 
-
-
-
+When I talk about side effects, I mostly mean stuff like non-deterministic computations, mutable references, getting user input, making REST calls,
+spawning multiple threads, deleting System32, transmitting nuclear codes. Functions that have the potential to fail or have behavior that is not "referentially transparent" when called subsequently.
+Some common Monads for this kind of thing are `IO` in Haskell, or `Effect` and `Aff` in PureScript.
 
