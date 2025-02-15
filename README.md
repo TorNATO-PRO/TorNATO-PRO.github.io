@@ -1,3 +1,3 @@
 # Nathan Waltz Blog
 
-This is the repository holding the Astro code for my blog!
+This is the repository that holds code for my blog.
