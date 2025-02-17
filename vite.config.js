@@ -6,8 +6,9 @@ export default defineConfig({
         cssMinify: true,
         rollupOptions: {
             input: {
-                main: "./index.html",
-                portfolio: './pages/portfolio.html'
+                main: './index.html',
+                portfolio: './pages/portfolio.html',
+                elmFirstThought: './pages/blog/elm-first-thoughts.html',
             }
         }
     },
