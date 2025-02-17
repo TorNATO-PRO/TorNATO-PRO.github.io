@@ -5,8 +5,10 @@ export default defineConfig({
         emptyOutDir: true,
         cssMinify: true,
         rollupOptions: {
-            main: "./index.html",
-            portfolio: './pages/portfolio.html',
+            input: {
+                main: "./index.html",
+                portfolio: './pages/portfolio.html'
+            }
         }
     },
     plugins: [
