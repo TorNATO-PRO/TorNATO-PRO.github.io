@@ -36,22 +36,30 @@
         </div>
 
         <!-- Hero Section -->
-        <!-- Hero Section -->
-        <section class="hero min-h-[70vh] bg-base-200 p-4">
-            <div class="hero-content flex-col lg:flex-row gap-8">
-                <img src="../public/profilephoto.jpg"
-                    class="max-w-sm rounded-lg shadow-2xl ring ring-primary ring-offset-base-100 ring-offset-2"
-                    alt="Nathan Waltz Profile Picture" />
-                <div class="max-w-2xl">
-                    <h1 class="text-5xl font-bold mb-4">Nathan Waltz</h1>
-                    <h2 class="text-2xl font-semibold text-primary mb-4">Software Developer & Computer Scientist</h2>
-                    <p class="py-6 text-lg leading-relaxed">
+        <section class="hero min-h-[70vh] bg-base-200">
+            <div class="hero-content flex-col lg:flex-row gap-8 px-4 py-8">
+                <!-- Image Container with responsive sizing -->
+                <div class="w-full max-w-[250px] lg:max-w-sm">
+                    <img src="../public/profilephoto.jpg"
+                        class="w-full h-auto rounded-lg shadow-2xl ring ring-primary ring-offset-base-100 ring-offset-2"
+                        alt="Nathan Waltz Profile Picture" />
+                </div>
+
+                <!-- Content Container -->
+                <div class="max-w-2xl text-center lg:text-left">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-4">Nathan Waltz</h1>
+                    <h2 class="text-xl lg:text-2xl font-semibold text-primary mb-4">Software Developer & Computer
+                        Scientist</h2>
+                    <p class="py-4 text-base lg:text-lg leading-relaxed">
                         I am passionate about functional programming and innovative problem-solving. I build robust web
-                        applications using PureScript, Elm and Haskell. I hold an undergraduate degree from Washington State University and am pursuing a graduate degree in programming languages and compilers at the
-                        University of Texas at Austin. Outside of work, I practice karate and travel the world. By the way, that is me in the middle with my mom and brother.
+                        applications using PureScript and modern tools. I hold an undergraduate degree from Washington
+                        State University and am pursuing a graduate degree in programming languages and compilers at the
+                        University of Texas at Austin. Outside of work and school, I practice karate and travel the world.
                     </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="https://www.linkedin.com/in/nathan-waltz" target="_blank" class="btn btn-primary">
+                    <!-- Social Links -->
+                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-6">
+                        <a href="https://www.linkedin.com/in/nathan-waltz" target="_blank"
+                            class="btn btn-primary w-full sm:w-auto">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="inline-block mr-2" viewBox="0 0 16 16">
                                 <path
@@ -59,7 +67,8 @@
                             </svg>
                             Connect on LinkedIn
                         </a>
-                        <a href="https://github.com/TorNATO-PRO" target="_blank" class="btn btn-outline btn-primary">
+                        <a href="https://github.com/TorNATO-PRO" target="_blank"
+                            class="btn btn-outline btn-primary w-full sm:w-auto">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="inline-block mr-2" viewBox="0 0 16 16">
                                 <path
