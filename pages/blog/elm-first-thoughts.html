@@ -65,10 +65,10 @@
                 <!-- Text Content -->
                 <div class="text-center max-w-2xl">
                     <h1 class="text-5xl font-bold mb-8">First Thoughts on Elm</h1>
-                    <div class="flex justify-center items-center gap-4 mb-8">
-                        <div class="badge badge-primary">Functional Programming</div>
-                        <div class="badge badge-secondary">Elm</div>
-                        <div class="badge badge-accent">Web Development</div>
+                    <div class="flex justify-center items-center flex-wrap gap-2 mb-8">
+                        <div class="badge badge-primary whitespace-normal text-wrap h-auto">Functional Programming</div>
+                        <div class="badge badge-secondary whitespace-normal text-wrap h-auto">Elm</div>
+                        <div class="badge badge-accent whitespace-normal text-wrap h-auto">Web Development</div>
                     </div>
                     <div class="flex items-center justify-center gap-4 text-sm mb-8">
                         <div class="flex items-center gap-2">
@@ -112,8 +112,10 @@
                             Elm and Purescript are both fantastic functional languages for frontend development.
                             Everyone knows Elm is probably the easiest for beginners coming from JavaScript/TypeScript,
                             while Purescript is more for those who love Haskell but want to do web development. In this
-                            post, I will share my first impressions of Elm and compare it to Purescript. Additionally, I'll do a
-                            depth-first search maze generation animation using both Purescript Halogen and Elm and see how 
+                            post, I will share my first impressions of Elm and compare it to Purescript. Additionally,
+                            I'll do a
+                            depth-first search maze generation animation using both Purescript Halogen and Elm and see
+                            how
                             they stack up.
                         </p>
                     </div>
@@ -127,6 +129,39 @@
                             <div class="badge badge-outline">Zero Runtime Errors</div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="container mx-auto px-4 py-8">
+            <div class="max-w-3xl mx-auto">
+                <!-- Table of Contents -->
+                <div class="card bg-base-100 shadow-xl mb-8">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">Table of Contents</h2>
+                        <ul class="menu bg-base-200 rounded-box">
+                            <li><a href="#dislaimer">Disclaimer</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="prose lg:prose-lg max-w-none">
+                    <!-- Disclaimer -->
+                    <section id="disclaimer" class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6">Disclaimer</h2>
+                        <div class="card bg-base-100 shadow-xl">
+                            <div class="alert alert-warning mt-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    class="stroke-current shrink-0 w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>I would not recommend developing in Elm for greenfield projects, the compiler hasn't been updated in years, and there are very few novel libraries being created.</span>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
