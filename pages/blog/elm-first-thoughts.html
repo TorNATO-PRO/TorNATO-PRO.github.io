@@ -96,27 +96,39 @@
             </div>
         </div>
 
+        <!-- Disclaimer Section -->
+        <div class="container mx-auto px-4 py-8 mx-auto max-w-3xl">
+            <div class="alert alert-warning mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="stroke-current shrink-0 w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>I would not recommend developing in Elm for greenfield projects, the compiler hasn't been updated
+                    in years, and there are very few novel libraries being created.</span>
+            </div>
+        </div>
+
         <!-- Abstract Section -->
-        <div class="container mx-auto px-4 py-8">
+        <div class="container mx-auto px-4 py-4">
             <div class="card bg-base-100 shadow-xl max-w-3xl mx-auto">
                 <div class="card-body">
                     <!-- Abstract Header -->
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="badge badge-lg">Abstract</div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <h2 class="text-3xl font-bold">Abstract</h2>
                         <div class="divider divider-horizontal"></div>
                     </div>
 
                     <!-- Abstract Content -->
                     <div class="prose lg:prose-lg">
                         <p class="text-lg leading-relaxed">
-                            Elm and Purescript are both fantastic functional languages for frontend development.
-                            Everyone knows Elm is probably the easiest for beginners coming from JavaScript/TypeScript,
-                            while Purescript is more for those who love Haskell but want to do web development. In this
-                            post, I will share my first impressions of Elm and compare it to Purescript. Additionally,
-                            I'll do a
-                            depth-first search maze generation animation using both Purescript Halogen and Elm and see
-                            how
-                            they stack up.
+                            Elm and Purescript are both exceptional functional programming languages suitable for
+                            frontend development. While Elm is widely regarded as an accessible option for beginners
+                            transitioning from JavaScript or TypeScript, Purescript is preferred by enthusiasts of
+                            Haskell seeking a web-first alternative. In this post, I will present my initial impressions
+                            of Elm and compare it to Purescript. Furthermore, I will employ a depth-first search maze
+                            generation animation in both Purescript Halogen and Elm to assess their relative
+                            strengths and weaknesses.
                         </p>
                     </div>
 
@@ -141,28 +153,64 @@
                     <div class="card-body">
                         <h2 class="card-title mb-4">Table of Contents</h2>
                         <ul class="menu bg-base-200 rounded-box">
-                            <li><a href="#dislaimer">Disclaimer</a></li>
+                            <li><a href="#problem-statement">Problem Statement</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Main Content -->
-                <div class="prose lg:prose-lg max-w-none">
-                    <!-- Disclaimer -->
-                    <section id="disclaimer" class="mb-12">
-                        <h2 class="text-3xl font-bold mb-6">Disclaimer</h2>
-                        <div class="card bg-base-100 shadow-xl">
-                            <div class="alert alert-warning mt-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    class="stroke-current shrink-0 w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                <span>I would not recommend developing in Elm for greenfield projects, the compiler hasn't been updated in years, and there are very few novel libraries being created.</span>
+                <!-- Problem Statement Section -->
+                <section id="problem-statement" class="mb-12">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <!-- Section Header -->
+                            <div class="flex items-center gap-4 mb-6">
+                                <h2 class="text-3xl font-bold">Problem Statement</h2>
+                                <div class="divider divider-horizontal"></div>
+                            </div>
+
+                            <!-- Main Content -->
+                            <div class="prose lg:prose-lg max-w-none">
+                                <p class="lead">
+                                    In the realm of frontend development, choosing between Elm and PureScript presents
+                                    an interesting dilemma.
+                                    Both languages promise type-safe, functional programming for the web, but with
+                                    distinctly different approaches.
+                                </p>
+
+                                <!-- Key Questions -->
+                                <div class="card bg-base-200 my-6 p-6">
+                                    <h3 class="text-xl font-semibold mb-4">Key Questions</h3>
+                                    <ul class="list-none space-y-3">
+                                        <li class="flex items-center gap-3">
+                                            <svg class="h-5 w-5 flex-shrink-0 text-primary align-middle"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 2L4 12l8 10 8-10z" />
+                                            </svg>
+                                            <span class="text-base">What are areas where elm excels over Purescript for
+                                                this problem, and vice versa?</span>
+                                        </li>
+                                        <li class="flex items-center gap-3">
+                                            <svg class="h-5 w-5 flex-shrink-0 text-primary align-middle"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 2L4 12l8 10 8-10z" />
+                                            </svg>
+                                            <span class="text-base">Can we actually achieve zero runtime errors, in
+                                                practice?</span>
+                                        </li>
+                                        <li class="flex items-center gap-3">
+                                            <svg class="h-5 w-5 flex-shrink-0 text-primary align-middle"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 2L4 12l8 10 8-10z" />
+                                            </svg>
+                                            <span class="text-base">How does the developer experience differ when doing
+                                                effectful computation?</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
