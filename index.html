@@ -8,6 +8,7 @@
   <title>TorNATO's Den</title>
   <meta name="description" content="Author: Nathan Waltz, Software Developer and Computer Scientist">
   <meta name="robots" content="noindex,nofollow">
+  <script src="/dfs-elm.js"></script>
   <script type="module" defer src="./src/copyright.js"></script>
 </head>
 
@@ -41,27 +42,10 @@
         <a href="/pages/blog/elm-first-thoughts.html" class="block transition-transform hover:scale-105">
           <div class="card bg-base-300 shadow-xl">
             <figure class="px-10 pt-10">
-              <svg class="w-60 h-60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 323.141 322.95"
-                enable-background="new 0 0 323.141 322.95" xml:space="preserve">
-                <g>
-                  <polygon fill="#F0AD00" points="161.649,152.782 231.514,82.916 91.783,82.916" />
-
-                  <polygon fill="#7FD13B" points="8.867,0 79.241,70.375 232.213,70.375 161.838,0" />
-
-                  <rect fill="#7FD13B" x="192.99" y="107.392"
-                    transform="matrix(0.7071 0.7071 -0.7071 0.7071 186.4727 -127.2386)" width="107.676"
-                    height="108.167" />
-
-                  <polygon fill="#60B5CC" points="323.298,143.724 323.298,0 179.573,0" />
-
-                  <polygon fill="#5A6378" points="152.781,161.649 0,8.868 0,314.432" />
-
-                  <polygon fill="#F0AD00" points="255.522,246.655 323.298,314.432 323.298,178.879" />
-
-                  <polygon fill="#60B5CC" points="161.649,170.517 8.869,323.298 314.43,323.298" />
-                </g>
-              </svg>
+              <!-- SVG Container -->
+              <div class="p-6 border-2 border-primary rounded-lg shadow-lg bg-base-100 hover:shadow-xl transition-shadow duration-300">
+                <div id="elm"></div>
+              </div>
             </figure>
             <div class="card-body items-center text-center">
               <h2 class="card-title">Elm First Thoughts</h2>
@@ -124,6 +108,13 @@
       </p>
     </aside>
   </footer>
+
+  <script>
+    var app = Elm.Main.init({
+      node: document.getElementById('elm'),
+      flags: { width: 200 }
+    });
+  </script>
 </body>
 
 </html>
