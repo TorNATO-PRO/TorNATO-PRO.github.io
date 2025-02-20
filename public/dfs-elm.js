@@ -5237,7 +5237,7 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Data$MazeState$Wall = 0;
-var $author$project$Main$cellSize = 20;
+var $author$project$Main$cellSize = 10;
 var $elm$json$Json$Decode$decodeValue = _Json_run;
 var $author$project$Main$defaultWidth = 200;
 var $author$project$Main$Flags = function (width) {
