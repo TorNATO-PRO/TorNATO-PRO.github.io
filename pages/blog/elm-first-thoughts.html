@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="../../src/style.css" rel="stylesheet" />
     <title>TorNATO's Den</title>
-    <meta name="description" content="Author: Nathan Waltz, Software Developer and Computer Scientist">
-    <meta name="robots" content="noindex,nofollow">
+    <meta name="description" content="Nathan Waltz is a software developer, computer scientist, and creator of TorNATO's Den — a digital space for exploring innovative technologies and ideas.">    <meta name="robots" content="index,follow">
     <script src="/dfs-elm.js"></script>
     <script type="module" defer src="/src/copyright.js"></script>
 </head>
@@ -103,13 +102,9 @@
                     <!-- Abstract Content -->
                     <div class="prose lg:prose-lg">
                         <p class="text-lg leading-relaxed">
-                            Elm and Purescript are both exceptional functional programming languages suitable for
-                            frontend development. While Elm is widely regarded as an accessible option for beginners
-                            transitioning from JavaScript or TypeScript, Purescript is preferred by enthusiasts of
-                            Haskell seeking a web-first alternative. In this post, I will present my initial impressions
-                            of Elm and compare it to Purescript. Furthermore, I will employ a depth-first search maze
-                            generation animation in both Purescript Halogen and Elm to assess their relative
-                            strengths and weaknesses.
+                            Elm is widely regarded as an accessible option for beginners transitioning from JavaScript or TypeScript.
+                            In this post, I will present my initial impressions of Elm by creating a depth-first search maze generation 
+                            animation - this animation can be viewed in the heading. Additionally, I will discuss my thoughts on the Elm architecture.
                         </p>
                     </div>
 
@@ -135,6 +130,7 @@
                         <h2 class="card-title mb-4">Table of Contents</h2>
                         <ul class="menu bg-base-200 rounded-box">
                             <li><a href="#problem-statement">Problem Statement</a></li>
+                            <li><a href="#the-elm-architecture">The Elm Architecture</a></li>
                         </ul>
                     </div>
                 </div>
@@ -152,7 +148,10 @@
                             <!-- Main Content -->
                             <div class="prose lg:prose-lg max-w-none">
                                 <p class="lead">
-                                    In the realm of frontend development, the choice between Elm and PureScript presents an intriguing dilemma. Both languages are purely functional and statically typed, but they differ significantly in their design philosophies. Elm prioritizes simplicity and beginner-friendliness, while PureScript has a steeper learning curve but offers a wealth of features reminiscent of Haskell. Both languages promise type-safe functional programming for web applications. So, which one should we select for our projects? I will provide a brief survey of the two languages, keeping in mind the following questions:
+                                    Elm is widely regarded as a beginner friendly language. I think the Model-View-Update approach makes a
+                                    lot of sense, especially for applying functional programming to web development. However, I believe that
+                                    it can produce unnecessary cognitive overhead for simple problems. In this post, I will elaborate more on what
+                                    I mean by that, and how I think it compares to PureScript.
                                 </p>
 
                                 <!-- Key Questions -->
@@ -164,8 +163,7 @@
                                                 fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M12 2L4 12l8 10 8-10z" />
                                             </svg>
-                                            <span class="text-base">What are areas where Elm excels over Purescript for
-                                                this problem, and vice versa?</span>
+                                            <span class="text-base">What is the Elm architecture and why is it important?</span>
                                         </li>
                                         <li class="flex items-center gap-3">
                                             <svg class="h-5 w-5 flex-shrink-0 text-primary align-middle"
@@ -180,10 +178,31 @@
                                                 fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M12 2L4 12l8 10 8-10z" />
                                             </svg>
-                                            <span class="text-base">What is the developer experience?</span>
+                                            <span class="text-base">How does the development experience of a toy program in Elm compare to
+                                                Purescript Halogen?
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="the-elm-architecture">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <!-- Section Header -->
+                            <div class="flex items-center gap-4 mb-6">
+                                <h2 class="text-3xl font-bold">The Elm Architecture</h2>
+                                <div class="divider divider-horizontal"></div>
+                            </div>
+
+                            <!-- Main Content -->
+                            <div class="prose lg:prose-lg max-w-none">
+                                <p class="lead">
+                                Some content here
+                                </p>
                             </div>
                         </div>
                     </div>
