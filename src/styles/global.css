@@ -1,9 +1,13 @@
 @import "tailwindcss";
-
 @import "preline/variants.css";
+
 @source "../../node_modules/preline/dist/*.js";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  @apply font-sans;
+}
 
 /* Adds pointer cursor to buttons */
 @layer base {
