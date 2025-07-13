@@ -1,4 +1,5 @@
 ---
+import PrelineLoader from '../components/PrelineLoader.astro';
 import '../styles/global.css'
 const { title = 'Nathan Waltz' } = Astro.props;
 ---
@@ -17,5 +18,5 @@ const { title = 'Nathan Waltz' } = Astro.props;
     </main>
   </body>
 
-  <script type="module" src="/src/scripts/preline-init.js" is:inline />
+  <PrelineLoader />
 </html>
