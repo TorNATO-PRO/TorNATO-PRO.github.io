@@ -1,7 +1,7 @@
-import { useEffect } from "preact/hooks";
+import { useLayoutEffect } from "preact/hooks";
 
 export default function PrelineLoader() {
-    useEffect(() => {
+    useLayoutEffect(() => {
         import("preline");
     }, []);
 
