@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run prepare && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prepare": "cp node_modules/preline/dist/index.js public/assets/preline.js"
+    "prepare": "mkdir -p public/assets && cp node_modules/preline/dist/index.js public/assets/preline.js"
   },
   "dependencies": {
     "@astrojs/preact": "^4.1.0",

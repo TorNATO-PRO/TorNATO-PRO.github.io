@@ -7,6 +7,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+public/assets/preline.js
+
 node_modules
 dist
 dist-ssr
