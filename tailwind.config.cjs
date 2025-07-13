@@ -4,8 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
   darkMode: 'class',
   content: [
-    './src/**/*.{astro,html,js,jsx,ts,tsx}',
-    './node_modules/preline/**/*.js'
+    './src/**/*.{astro,html,js,jsx,ts,tsx,mjs}',
   ],
   theme: {
     extend: {
