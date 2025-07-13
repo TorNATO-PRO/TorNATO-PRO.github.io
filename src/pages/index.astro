@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import SectionNav from '../components/SectionNav.astro';
+import FadeOnScroll from '../components/FadeOnScroll.astro';
+---
+<Layout>
+  <!-- Theme toggle button in the top right corner -->
+  <div class="absolute top-4 right-4 z-50">
+    <ThemeToggle />
+  </div>
+
+  <!-- Hero section with fade effect on scroll -->
+  <FadeOnScroll id="hero-fade">
+    <div id ="hero-fade" class="transition-opacity duration-300">
+      <Hero />
+      <SectionNav target="#about" />
+    </div>
+  </FadeOnScroll>
+
+  <!-- About section -->
+  <section id="about" class="min-h-screen">
+    <!-- content -->
+  </section>
+</Layout>
+
+<script is:inline>
+  window.addEventListener('scroll', () => {
+    const fade = document.getElementById('hero-fade');
+    const offset = window.scrollY;
+    const opacity = Math.max(1 - offset / 300, 0);
+    fade.style.opacity = opacity.toString();
+  });
+</script>

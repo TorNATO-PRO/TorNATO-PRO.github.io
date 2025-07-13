@@ -1,0 +1,73 @@
+@import "tailwindcss";
+@import "preline/variants.css";
+
+@source "../../node_modules/preline/dist/*.js";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  @apply font-sans;
+}
+
+/* Adds pointer cursor to buttons */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Defaults hover styles on all devices */
+@custom-variant hover (&:hover);
+
+@keyframes fadeHi {
+  0%, 10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  40%, 60% {
+    opacity: 0;
+    transform: translateY(-0.5em);
+  }
+  90%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeZh {
+  0%, 10% {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  40%, 60% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90%, 100% {
+    opacity: 0;
+    transform: translateY(-0.5em);
+  }
+}
+
+.animate-hi-gentle {
+  animation: fadeHi 6s ease-in-out infinite;
+}
+
+.animate-zh-gentle {
+  animation: fadeZh 6s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-image: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
