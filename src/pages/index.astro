@@ -1,16 +1,11 @@
 ---
 import Layout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import ThemeToggle from '../components/ThemeToggle.astro';
 import SectionNav from '../components/SectionNav.astro';
 import FadeOnScroll from '../components/FadeOnScroll.astro';
+import Header from '../components/Header.astro';
 ---
 <Layout>
-  <!-- Theme toggle button in the top right corner -->
-  <div class="fixed top-4 right-4 z-50">
-    <ThemeToggle client:load />
-  </div>
-
   <!-- Hero section with fade effect on scroll -->
   <FadeOnScroll id="hero-fade">
     <div id ="hero-fade" class="transition-opacity duration-300">
