@@ -1,7 +1,11 @@
 ---
 import Layout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 ---
 <Layout>
+  <div class="absolute top-4 right-4 z-50">
+    <ThemeToggle />
+  </div>
   <Hero />
 </Layout>
