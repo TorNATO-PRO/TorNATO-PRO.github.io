@@ -5,6 +5,7 @@ module.exports = {
   darkMode: 'class',
   content: [
     './src/**/*.{astro,html,js,jsx,ts,tsx,mjs}',
+    './node_modules/preline/**/*.js'
   ],
   theme: {
     extend: {

@@ -6,9 +6,9 @@ const { id = "fade-container" } = Astro.props;
   <slot />
 </div>
 
-<script is:inline>
+<script is:inline define:vars={{ id }}>
   window.addEventListener('scroll', () => {
-    const fade = document.getElementById('{id}');
+    const fade = document.getElementById(id);
     if (!fade) return;
     const offset = window.scrollY;
     const opacity = Math.max(1 - offset / 300, 0);
