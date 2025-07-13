@@ -1,5 +1,4 @@
 ---
-import PrelineLoader from '../components/PrelineLoader.jsx';
 import '../styles/global.css'
 const { title = 'Nathan Waltz' } = Astro.props;
 ---
@@ -11,6 +10,7 @@ const { title = 'Nathan Waltz' } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>{title}</title>
+    <script type="module" src="/assets/preline.js" defer></script>
   </head>
   <body class="bg-white text-gray-900 bg-white dark:bg-gray-900 dark:text-gray-100">
     <main class="scroll-smooth overflow-y-scroll">
@@ -18,5 +18,5 @@ const { title = 'Nathan Waltz' } = Astro.props;
     </main>
   </body>
 
-  <PrelineLoader client:load />
-</html>
+
+  </html>
