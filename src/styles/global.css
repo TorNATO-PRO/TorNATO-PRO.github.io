@@ -9,6 +9,10 @@ body {
   @apply font-sans;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Adds pointer cursor to buttons */
 @layer base {
   button:not(:disabled),
