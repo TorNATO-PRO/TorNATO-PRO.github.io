@@ -38,10 +38,12 @@ const { pages }: { pages?: { href: string; pageName: string }[] } = Astro.props;
 </header>
 
 <script is:inline>
-    const btn = document.querySelector(".menu");
-    const list = document.getElementById("nav-links");
-    btn?.addEventListener("click", () => {
-        const open = list.classList.toggle("open");
-        btn.setAttribute("aria-expanded", String(open));
-    });
+    window.addEventListener('DOMContentLoaded', () => {
+        const btn = document.querySelector(".menu");
+        const list = document.getElementById("nav-links");
+        btn?.addEventListener("click", () => {
+            const open = list.classList.toggle("open");
+            btn.setAttribute("aria-expanded", String(open));
+        });
+    })
 </script>
