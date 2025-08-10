@@ -82,4 +82,10 @@ h1, h2, h3, h4, h5, h6 {
   font-variation-settings: 
     "wdth" 100;
   background: var(--color-background);
+  scroll-behavior: smooth;
+}
+
+/* When they prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
 }
