@@ -1,11 +1,18 @@
 ---
 import Layout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+
+const title = "Nathan Waltz's Tech Blog";
+const subtitle = "All things functional programming, PL, static analysis, and life!"
+const imageLink = "/logo.svg";
 ---
-<Layout>
+<Layout
+  title={title}
+  subtitle={subtitle}
+  >
   <Hero
-    heading="Nathan Waltz's Tech Blog"
-    subtitle="All things functional programming, PL, static analysis, and life!" 
-    imageLink="/logo.svg"
+    heading={title}
+    subtitle={subtitle}
+    imageLink={imageLink}
   />
 </Layout>
