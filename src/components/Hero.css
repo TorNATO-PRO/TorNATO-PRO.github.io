@@ -9,7 +9,6 @@
     background: var(--color-background);
     padding-inline: calc(2 * var(--space));
     padding-block: calc(3 * var(--space));
-    font-family: var(--heading-font);
     display: grid;
     place-content: center;
 }
@@ -26,6 +25,7 @@
     color: var(--color-headline);
     margin: 0;
     font-size: var(--title-size);
+    font-family: var(--heading-font);
     font-weight: 700;
     text-align: center;
     line-height: 1.15;
@@ -35,6 +35,7 @@
     color: var(--color-paragraph);
     font-weight: 500;
     font-size: var(--subtitle-size);
+    font-family: var(--heading-font);
     margin: 0;
     max-width: min(var(--measure), 90vw);
     text-align: center;
