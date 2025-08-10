@@ -16,7 +16,7 @@
 .hero .header {
     display: grid;
     justify-items: center;
-    gap: calc(2 * var(--space));
+    gap: calc(3 * var(--space));
     max-width: 80rem;
     margin-inline: auto;
 }
