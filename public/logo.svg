@@ -7,20 +7,24 @@
   </defs>
 
   <style>
-    .spin {
-        transform-box: fill-box;
-        transform-origin: center;
-        animation: spin 48s linear infinite;
+    .spin-slow, .spin-fast {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
     }
-    
+
+    .spin-slow { animation-name: spin; animation-duration: 48s; }
+    .spin-fast { animation-name: spin; animation-duration: 60s; animation-direction: reverse; }
+
     @keyframes spin { to { transform: rotate(360deg); } }
 
     @media (prefers-reduced-motion: reduce) {
-      .spin { animation: none !important; }
+      .spin-slow, .spin-fast { animation: none !important; }
     }
   </style>
 
-  <g stroke="url(#cccoil-grad)" fill="none" stroke-linecap="round" class="spin">
+  <g stroke="url(#cccoil-grad)" fill="none" stroke-linecap="round" class="spin-slow">
     <circle class="dash" r="342" cx="400" cy="400" stroke-width="9.5" stroke-dasharray="1827 2149" transform="rotate(360, 400, 400)" opacity="0.87"/>
     <circle class="dash" r="324" cx="400" cy="400" stroke-width="9.5" stroke-dasharray="1634 2036" transform="rotate(340, 400, 400)" opacity="0.34"/>
     <circle class="dash" r="306" cx="400" cy="400" stroke-width="9.5" stroke-dasharray="1453 1923" transform="rotate(320, 400, 400)" opacity="0.84"/>
@@ -29,6 +33,9 @@
     <circle class="dash" r="252" cx="400" cy="400" stroke-width="9.5" stroke-dasharray="972 1583" transform="rotate(260, 400, 400)" opacity="0.75"/>
     <circle class="dash" r="234" cx="400" cy="400" stroke-width="9.5" stroke-dasharray="833 1470" transform="rotate(240, 400, 400)" opacity="0.75"/>
     <circle class="dash" r="216" cx="400" cy="400" stroke-width="9.5" stroke-dasharray="705 1357" transform="rotate(220, 400, 400)" opacity="0.19"/>
+  </g>
+
+  <g stroke="url(#cccoil-grad)" fill="none" stroke-linecap="round" class="spin-fast">
     <circle class="dash" r="198" cx="400" cy="400" stroke-width="9.5" stroke-dasharray="587 1244" transform="rotate(200, 400, 400)" opacity="0.35"/>
     <circle class="dash" r="180" cx="400" cy="400" stroke-width="9.5" stroke-dasharray="481 1131" transform="rotate(180, 400, 400)" opacity="0.67"/>
     <circle class="dash" r="162" cx="400" cy="400" stroke-width="9.5" stroke-dasharray="385 1018" transform="rotate(160, 400, 400)" opacity="0.91"/>

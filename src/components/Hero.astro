@@ -7,10 +7,18 @@ const subtitleHtml = subtitle.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 ---
 <section
     class="hero"
+    aria-labelledby="hero-title"
+    aria-describedby="hero-subtitle"
 >
-    <header class="header">
-        <img src={imageLink} style="max-height: 400px;" />
-        <h2 class="title">{heading}</h2>
-        <h3 class="subtitle" set:html={subtitleHtml}></h3>
-    </header>
+    <div class="header">
+        <img
+            src={imageLink}
+            alt=""
+            style="max-height: 400px;"
+            decoding="async"
+            fetchpriority="high"
+        />
+        <h1 id="hero-title" class="title">{heading}</h1>
+        <p id="hero-subtitle" class="subtitle" set:html={subtitleHtml}></p>
+    </div>
 </section>
