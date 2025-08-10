@@ -1,5 +1,4 @@
 ---
-import Header from '../components/Header.astro';
 import '../styles/global.css'
 const { title = 'Nathan Waltz' } = Astro.props;
 ---
@@ -7,17 +6,12 @@ const { title = 'Nathan Waltz' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>{title}</title>
-    <script type="module" src="/assets/preline.js" defer></script>
   </head>
-  <body class="bg-white text-gray-900 bg-white dark:bg-gray-900 dark:text-gray-100">
-    <main class="scroll-smooth overflow-y-scroll pt-16">
-      <slot />
-    </main>
+
+  <body>
+    <slot>
   </body>
-
-
-  </html>
+</html>

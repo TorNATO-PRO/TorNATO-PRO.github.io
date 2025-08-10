@@ -1,0 +1,32 @@
+.hero {
+    height: 100vh;
+    background: oklch(0.9997 0.0013 106.42);
+    padding-inline-start: 1rem;
+    padding-inline-end: 1rem;
+    display: block;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+}
+
+.title {
+    color: var(--color-headline);
+    margin-top: 1rem;
+    font-size: xx-large;
+    font-weight: 700;
+    text-align: center;
+}
+
+.subtitle {
+    color: var(--color-paragraph);
+    font-weight: 500;
+    font-size: large;
+    margin-top: 2rem;
+    width: 400px;
+    text-align: center;
+}

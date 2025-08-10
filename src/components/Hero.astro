@@ -1,60 +1,16 @@
 ---
+import './Hero.css'
 
+const { heading, subtitle, imageLink } = Astro.props;
+
+const subtitleHtml = subtitle.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 ---
-
 <section
-    id="hero"
-    class="h-screen flex items-center justify-center relative overflow-hidden bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+    class="hero"
 >
-    <div class="max-w-screen-xl mx-auto px-4 lg:py-32 text-center">
-        <h1
-            class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 leading-tight mb-6 text-center"
-        >
-            <span class="inline sm:hidden">
-                Hi, I&apos;m <span class="text-blue-600 dark:text-blue-400"
-                    >Nathan Waltz</span
-                >
-            </span>
-
-            <span class="relative hidden sm:inline-block w-auto whitespace-nowrap">
-                <span
-                    class="absolute animate-zh-gentle inset-0 flex justify-center items-center whitespace-nowrap"
-                >
-                    你好，我是
-                    <span class="text-blue-600 dark:text-blue-400">&nbsp;Nathan Waltz</span>
-                </span>
-
-                <span
-                    class="absolute animate-hi-gentle delay-[3s] inset-0 flex justify-center items-center whitespace-nowrap"
-                >
-                    Hi, I’m
-                    <span class="text-blue-600 dark:text-blue-400">&nbsp;Nathan Waltz</span>
-                </span>
-            </span>
-        </h1>
-        <p
-            class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-12 mb-12"
-        >
-            <span class="animate-gradient"> Compiler nerd. </span>
-            I craft tools that focus on correctness over performance.
-        </p>
-        <a
-            href="https://www.linkedin.com/in/nathan-waltz/"
-            class="inline-flex items-center gap-x-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 transition"
-        >
-            Connect
-            <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-            >
-                <path
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-            </svg>
-        </a>
-    </div>
+    <header class="header">
+        <img src={imageLink} style="max-height: 400px;" />
+        <h2 class="title">{heading}</h2>
+        <h3 class="subtitle" set:html={subtitleHtml}></h3>
+    </header>
 </section>
