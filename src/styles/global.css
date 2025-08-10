@@ -1,77 +1,74 @@
-@import "tailwindcss";
-@import "preline/variants.css";
+/* A modern CSS reset - Josh Comeau */
 
-@source "../../node_modules/preline/dist/*.js";
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
 
 body {
-  @apply font-sans;
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
 }
 
-html {
-  scroll-behavior: smooth;
+/* 6. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
 }
 
-/* Adds pointer cursor to buttons */
-@layer base {
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    cursor: pointer;
-  }
+/* 7. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
 }
 
-/* Defaults hover styles on all devices */
-@custom-variant hover (&:hover);
-
-@keyframes fadeHi {
-  0%, 10% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  40%, 60% {
-    opacity: 0;
-    transform: translateY(-0.5em);
-  }
-  90%, 100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* 8. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
 }
 
-@keyframes fadeZh {
-  0%, 10% {
-    opacity: 0;
-    transform: translateY(0.5em);
-  }
-  40%, 60% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  90%, 100% {
-    opacity: 0;
-    transform: translateY(-0.5em);
-  }
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
 }
 
-.animate-hi-gentle {
-  animation: fadeHi 6s ease-in-out infinite;
+/*
+  10. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
 }
 
-.animate-zh-gentle {
-  animation: fadeZh 6s ease-in-out infinite;
+/* Global styles  */
+
+:root {
+  /* colors */
+  --color-headline: oklch(0.3598 0.086 245.96);
+  --color-paragraph: oklch(0.5258 0.0285 252.09);
+  --color-background: oklch(0.995 0.01 106.42);
+
+
+  /* Spacing */
+  --space: 0.5rem;
 }
 
-.animate-gradient {
-  background-image: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
-  background-size: 200% 200%;
-  animation: gradientShift 6s ease infinite;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50% }
-  50% { background-position: 100% 50% }
-  100% { background-position: 0% 50% }
+* {
+  font-family: 'Roboto', sans-serif;
 }

@@ -1,0 +1,40 @@
+:root {
+  --title-size: clamp(1.75rem, 4vw + 0.5rem, 3rem);
+  --subtitle-size: clamp(1rem, 1.2vw + 0.9rem, 1.25rem);
+  --measure: 60ch;
+}
+
+.hero {
+    height: 100svh;
+    background: var(--color-background);
+    padding-inline: calc(2 * var(--space));
+    padding-block: calc(3 * var(--space));
+    display: grid;
+    place-content: center;
+}
+
+.hero .header {
+    display: grid;
+    justify-items: center;
+    gap: calc(2 * var(--space));
+    max-width: 80rem;
+    margin-inline: auto;
+}
+
+.hero .title {
+    color: var(--color-headline);
+    margin: 0;
+    font-size: var(--title-size);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.15;
+}
+
+.hero .subtitle {
+    color: var(--color-paragraph);
+    font-weight: 500;
+    font-size: var(--subtitle-size);
+    margin: 0;
+    max-width: min(var(--measure), 90vw);
+    text-align: center;
+}
