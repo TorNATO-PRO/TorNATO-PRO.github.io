@@ -65,7 +65,7 @@ h1, h2, h3, h4, h5, h6 {
   --color-headline: oklch(0.3598 0.086 245.96);
   --color-paragraph: oklch(0.5258 0.0285 252.09);
   --color-background: oklch(0.995 0.01 106.42);
-
+  --color-link: oklch(0.7115 0.1551 245.97);
 
   /* fonts */
   --heading-font: 'Manrope', sans-serif;
@@ -81,4 +81,5 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'IBM Plex Sans', sans-serif;
   font-variation-settings: 
     "wdth" 100;
+  background: var(--color-background);
 }

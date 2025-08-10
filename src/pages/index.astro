@@ -1,18 +1,40 @@
 ---
 import Layout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import Navbar from '../components/Navbar.astro';
 
 const title = "Nathan Waltz's Tech Blog";
 const subtitle = "All things functional programming, PL, static analysis, and life!"
 const imageLink = "/logo.svg";
+
+const pages =
+  [ { href: "#posts"
+    , pageName: "Posts" 
+    }
+  , { href: "#projects"
+    , pageName: "Projects"
+    }
+  , { href: "#about"
+    , pageName: "About"
+    }
+  ]
 ---
 <Layout
   title={title}
   subtitle={subtitle}
   >
+  <Navbar pages={pages} />
+
   <Hero
     heading={title}
     subtitle={subtitle}
     imageLink={imageLink}
   />
+
+  <div style="height: 100vh; padding: 2rem;">
+    <p>
+      Here is some content. Please do not judge. This is only here to make the frosted glass effect appear!
+    </p>
+
+  </div>
 </Layout>
