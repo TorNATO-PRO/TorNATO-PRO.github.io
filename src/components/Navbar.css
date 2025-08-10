@@ -145,7 +145,7 @@ header {
     }
 
 
-    .links .open {
+    .links.open {
         position: absolute;
         left: 1rem;
         right: 1rem;
@@ -161,8 +161,8 @@ header {
         animation: dropdown-in 160ms ease-out;
     }
 
-    .links .open li { margin: 0; }
-    .links .open a {
+    .links.open li { margin: 0; }
+    .links.open a {
         display: block;
         width: 100%;
         padding: 0.85rem 1rem;
