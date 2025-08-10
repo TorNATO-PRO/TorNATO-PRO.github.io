@@ -9,6 +9,7 @@
     background: var(--color-background);
     padding-inline: calc(2 * var(--space));
     padding-block: calc(3 * var(--space));
+    font-family: var(--heading-font);
     display: grid;
     place-content: center;
 }
