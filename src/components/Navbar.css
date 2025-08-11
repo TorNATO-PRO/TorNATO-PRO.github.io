@@ -21,6 +21,10 @@ header {
         background: hsl(0deg 0% 100% / 0.5);
     }
 
+    header.site-header {
+        background: transparent;
+    } 
+
     .glass {
         position: absolute;
         inset: 0;
@@ -95,6 +99,7 @@ header {
     font-weight: 500;
     padding: .5rem .75rem;
     border-radius: 0.5rem;
+    transition: background-color .15s ease, transform .12s ease;
     font-size: 0.95rem;
     line-height: 1;
     letter-spacing: 0.03rem;
@@ -109,6 +114,11 @@ header {
 
 .menu {
     display: none;
+}
+
+.menu svg {
+    fill: currentColor;
+    display: block;
 }
 
 @media (max-width:48rem) {
@@ -156,12 +166,19 @@ header {
         margin-inline: 1rem;
         padding: 0.4rem;
         margin: 0;
+        background-color: hsl(0deg 0% 100% / 0.5);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         border: 1px solid hsl(0 0% 0% / .08);
         border-radius: 0.9rem;
         animation: dropdown-in 160ms ease-out;
     }
 
-    .links.open li { margin: 0; }
+    .links.open li {
+        margin: 0;
+        background-color: hsl(0deg 0% 100% / 0.5);
+    }
+
     .links.open a {
         display: block;
         width: 100%;
@@ -173,4 +190,27 @@ header {
         text-decoration: none;
         color: var(--color-headline);
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .links.open {
+        transition: none;
+        animation: none;
+    }
+}
+
+@keyframes dropdown-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-transparency: reduce){
+  .glass, .links.open{ backdrop-filter: none; -webkit-backdrop-filter: none; }
 }
