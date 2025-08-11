@@ -166,17 +166,17 @@ header {
         margin-inline: 1rem;
         padding: 0.4rem;
         margin: 0;
-        background-color: hsl(0deg 0% 100% / 0.5);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border: 1px solid hsl(0 0% 0% / .08);
         border-radius: 0.9rem;
         animation: dropdown-in 160ms ease-out;
+        background: transparent;
     }
 
     .links.open li {
         margin: 0;
-        background-color: hsl(0deg 0% 100% / 0.5);
+        background: transparent;
     }
 
     .links.open a {
@@ -188,7 +188,14 @@ header {
         transition: background-color .15s ease, transform .12s ease;
         line-height: 1.2;
         text-decoration: none;
+        background: transparent;
         color: var(--color-headline);
+    }
+
+    .links.open a:hover {
+        background-color: oklch(0.95 0.02 255 / 0.5);
+        color: oklch(0.25 0.08 255);
+        cursor: pointer;
     }
 }
 
