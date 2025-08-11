@@ -59,4 +59,11 @@ const { pages }: { pages?: { href: string; pageName: string }[] } = Astro.props;
             }
         }
     });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            list.classList.remove("open");
+            btn.setAttribute("aria-expanded", "false");
+        }
+    });
 </script>
