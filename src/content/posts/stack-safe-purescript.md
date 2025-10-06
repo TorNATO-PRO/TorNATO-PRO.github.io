@@ -210,7 +210,7 @@ fib = fib' FibIdentity
 ```
 
 ```purescript
--- now we need to turn mutually recursive fib', eval cals into a data type.
+-- now we need to turn mutually recursive fib', eval calls into a data type.
 
 data FibKont
   = ContFibOne Int FibKont
