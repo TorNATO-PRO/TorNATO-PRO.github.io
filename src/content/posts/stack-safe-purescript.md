@@ -98,7 +98,7 @@ foldrCPS' fn acc lst = tailRec go (State { lst, k: Done })
   go (State { lst: Cons x xs, k }) = Loop (State { lst: xs, k: \res -> k (fn x res) })
 ```
 
-Now let's run it! Anddddd still the same problem. Well great, so it turns out that we are still building up a massive continuation. Once it was actually evaluated, we still ended up having to do all of the function calls and the closure of callbacks doesn't get turned into a loop. It turns out that tailRec isn't necessarily foolproof. Trampolining flattens self-recursion expressed as Loop/Done. It does not flatten a deep chain of plain function applications (e.g., a big composed continuation applied at the end, like we have here).
+Now let's run it! Anddddd still the same problem. Well great, so it turns out that we are still building up a massive continuation. Once it was actually evaluated, we still ended up having to do all of the function calls and the closure of callbacks doesn't get turned into a loop. It turns out that `tailRec` isn't necessarily foolproof. Trampolining flattens self-recursion expressed as Loop/Done. It does not flatten a deep chain of plain function applications (e.g., a big composed continuation applied at the end, like we have here).
 
 # Defunctionalization
 
