@@ -104,21 +104,21 @@ Let me show you something that does work.
 
 ```purescript
 -- naive CPS conversion
-fib :: Int -> Maybe Int
-fib = fib' identity
-  where
-  fib' k 0 = k $ Just 0
-  fib' k 1 = k $ Just 1
-  fib' k n
-   | n < 0 = k Nothing
-   | otherwise =
-      fib'
-        (\a -> 
-          fib'
-            (\b ->
-              k $ (+) <$> a <*> b
-            ) (n - 1)
-        ) (n - 2)
+-- fib :: Int -> Maybe Int
+-- fib = fib' identity
+--   where
+--   fib' k 0 = k $ Just 0
+--   fib' k 1 = k $ Just 1
+--   fib' k n
+--    | n < 0 = k Nothing
+--    | otherwise =
+--       fib'
+--         (\a -> 
+--           fib'
+--             (\b ->
+--               k $ (+) <$> a <*> b
+--             ) (n - 1)
+--         ) (n - 2)
 
 -- purescript compiler is stupid, so
 -- I have to do this
