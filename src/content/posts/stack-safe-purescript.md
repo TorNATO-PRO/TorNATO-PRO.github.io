@@ -243,6 +243,6 @@ data FibCall
   | FibFib' FibKont Int
 ```
 
-If you want to learn more, I highly recommend checking out on Nate Faubion's video on the subject.
+If you want to learn more, I highly recommend checking out on Nate Faubion's video on the subject. I was texting him mid-way through writing this asking why my stuff didn't work, and he put me on the right track.
 
 <iframe src="https://www.youtube.com/embed/yIfCePkImaU?si=hbytHGTjX-OrtibQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="margin-block: 2rem; width: calc(100vw - 4rem); max-width: 100%; height: auto; aspect-ratio: 16/9;"></iframe>
