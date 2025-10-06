@@ -8,7 +8,7 @@ draft: false
 
 # Tail Recursion
 
-If you have experience programming, you might avoid writing recursive functions due to a fear of overloading the stack with function calls, and you might view recursion in general as more of a toy than something that you can use in your day job. **Tail recursion** is a solution to this problem. It is a technique that allows you, the programmer, to trade stack space for heap space by writing a recursive function such that on each branch, the self-recursive call is the final action (first-order). This transformation enables **tail-call optimization**, allowing such functions to execute without growing the call stack. However, not all languages implement tail-call optimizations, so this solution is not yet a panacea. You can add this technique to your toolbox for making stack safe functions.
+If you have experience programming, you might avoid writing recursive functions due to a fear of overloading the stack with function calls, and you might view recursion in general as more of a toy than something that you can use in your day job. **Tail recursion** is a solution to this problem. It is a technique that allows you, the programmer, to trade stack space for heap space by writing a recursive function such that on each branch, the self-recursive call is the final action. This transformation enables **tail-call optimization**, allowing such functions to execute without growing the call stack. However, not all languages implement tail-call optimization (which is unfortunate, because that makes writing correct recursive code much harder), so this solution is not yet a panacea. You can add this technique to your toolbox for making stack safe functions.
 
 ```purescript
 -- CANNOT TCO
@@ -44,7 +44,7 @@ foldrCPS fn acc lst = go lst identity
   go (Cons x xs) k = go xs (\res -> k (fn x res))
 ```
 
-Great, now our function is stack safe? Now lets try running the code on a large list using spago repl with Purescript `0.15.15`. If you are like me, you probably just encountered a runtime crash!
+Great, now our function is stack safe? Now let's try running the code on a large list using spago repl with Purescript `0.15.15`. If you are like me, you probably just encountered a runtime crash!
 
 ```
 > foldrCPS (\x xs -> x + xs) 0 $ List.range 0 100000
@@ -59,9 +59,9 @@ Well, that’s not great. Was this entire post a lie? Not exactly. This is exact
 
 ## tailrec
 
-Luckily for us, Jordan Martinez has written a typeclass in a library called [tailrec](https://pursuit.purescript.org/packages/purescript-tailrec/6.1.0), which "captures stack-safe monadic tail recursion". As PureScript programmers, we can use this typeclass to force stack-safe evaluation by rewriting self-recursive computations in a way that PureScript can compile to Javascript in a stack safe manner. 
+Luckily for us, Jordan Martinez has written a type class in a library called [tailrec](https://pursuit.purescript.org/packages/purescript-tailrec/6.1.0), which "captures stack-safe monadic tail recursion". As PureScript programmers, we can use this type class to force stack-safe evaluation by rewriting self-recursive computations in a way that PureScript can compile to Javascript in a stack safe manner. 
 
-Now lets look at the function signature for `tailRec`, which "creates a pure tail-recursive function of one argument".
+Now let's look at the function signature for `tailRec`, which "creates a pure tail-recursive function of one argument".
 
 ```purescript 
 tailRec :: forall a b. (a -> Step a b) -> a -> b
@@ -77,13 +77,13 @@ pow n p = tailRec go { accum: 1, power: p }
 
 Great, so `tailRec` takes a function from `a -> Step a b`, an initial value of type `a`, and returns some `b` as the result.
 
-Lets look at the `Step a b` type now. It turns out that this type is isomorphic to `Either a b`.
+Let's look at the `Step a b` type now. It turns out that this type is isomorphic to `Either a b`.
 
 ```purescript
 data Step a b = Loop a | Done b
 ```
 
-Here, `a` can be seen as the type of the parameter that we operate on in the recursive call, and `b` is the type of the final result. Lets apply this to our `foldrCPS` function so we can avoid blowing up the stack.
+Here, `a` can be seen as the type of the parameter that we operate on in the recursive call, and `b` is the type of the final result. Let's apply this to our `foldrCPS` function so we can avoid blowing up the stack.
 
 ```purescript
 newtype State a b = State
@@ -98,7 +98,7 @@ foldrCPS' fn acc lst = tailRec go (State { lst, k: Done })
   go (State { lst: Cons x xs, k }) = Loop (State { lst: xs, k: \res -> k (fn x res) })
 ```
 
-Now lets run it! Anddddd still the same problem. Well great, so it turns out that we are still building up a massive continuation. Once it was actually evaluated, we still ended up having to do all of the function calls and the closure of callbacks doesn't get turned into a loop. It turns out that tailRec isn't necessarily foolproof.
+Now let's run it! Anddddd still the same problem. Well great, so it turns out that we are still building up a massive continuation. Once it was actually evaluated, we still ended up having to do all of the function calls and the closure of callbacks doesn't get turned into a loop. It turns out that tailRec isn't necessarily foolproof. Trampolining flattens self-recursion expressed as Loop/Done. It does not flatten a deep chain of plain function applications (e.g., a big composed continuation applied at the end, like we have here).
 
 # Defunctionalization
 
@@ -137,7 +137,7 @@ foldrCPS fn acc lst = go lst FAContIdentity
       acc'
 ```
 
-Now you can run this. And boom! It works and doesn't blow up the stack. Isn't that amazing? I promised in the beginning that I would show you how to do stack-safe operations over trees (or computations shaped as trees). Lets show how to do this same transformation over `fib`, or the naive implementation of computing the fibonacci number at some index `n`.
+Now you can run this. And boom! It works and doesn't blow up the stack. Isn't that amazing? I promised in the beginning that I would show you how to do stack-safe operations over trees (or computations shaped as trees). I'll show how to do this same transformation over `fib`, or the naive implementation of computing the fibonacci number at some index `n`.
 
 ```purescript
 -- naive implementation
