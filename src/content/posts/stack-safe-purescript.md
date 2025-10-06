@@ -30,7 +30,7 @@ foldl' fn acc (Cons x xs) = foldl' fn (fn acc x) xs
 
 ## Continuation Passing Style
 
-Continuation passing style is one way to convert a recursive function where the recursive function call is possibly not in tail position into a one where it is. Using this approach, we effectively pass an additional function that takes the result of the computation as a parameter and returns that parameter with something, but perhaps nothing, applied to the result. I can attempt to explain this, but I will let more practiced hands, such as Matt Might, explain - he will do a much better job. Additionally, Kristopher Micinski has a great video on the topic as well.
+Continuation passing style is one way to convert a recursive function where the recursive function call is possibly not in tail position into a one where it is. Using this approach, we effectively pass an additional function that takes the result of the computation as a parameter and returns that parameter with something, but perhaps nothing, applied to the result. I can attempt to explain this, but I will let more practiced hands, such as [Matt Might](https://matt.might.net/), explain - he will do a much better job. Additionally, [Kristopher Micinski](https://kmicinski.com/) has a great video on the topic as well.
 
 <iframe src="https://www.youtube.com/embed/1WXnSq5k790?si=UWgWED1ugdZHwZyH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="margin-block: 2rem; width: calc(100vw - 4rem); max-width: 100%; height: auto; aspect-ratio: 16/9;"></iframe>
 
