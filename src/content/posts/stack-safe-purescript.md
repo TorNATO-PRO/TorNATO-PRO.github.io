@@ -243,6 +243,83 @@ data FibCall
   | FibFib' FibKont Int
 ```
 
+# Least Fixed Point
+
+You might notice that in our function, we are essentially performing small step evaluation until we reach a fixpoint. It turns out that this pattern can be encapsulated by `Mu f`, which is the least fixed point of a functor `f` when it exists. In Nate Faubion's video, he talks about how to represent a fixed point computation in general in Purescript.
+
+```purescript
+-- Mu over the composition of thunks
+type DelayedMu f = Mu (Compose (Function Unit) f)
+
+-- Run a thunked small-step fixed point.
+fix :: ∀ b. Mu (Compose (Function Unit) (Either b)) -> b
+fix mu = case unroll mu of
+  Compose thunk ->
+    case thunk unit of
+      Left result -> result
+      Right mu' -> fix mu'
+```
+
+Now we can use this concept to rewrite our `fib'` to use this function, building up a bunch of thunks to be evaluated until a fixpoint.
+
+```purescript
+fib :: Int -> Maybe Int
+fib x = fix $ go (FibFib' FibIdentity x)
+  where
+  go call = roll $ Compose $ \_ -> case call of
+    FibFib' cont 0 -> Right $ go (FibEval cont (Just 0))
+    FibFib' cont 1 -> Right $ go (FibEval cont (Just 1))
+    FibFib' cont n | n < 0 -> Right $ go (FibEval cont Nothing)
+    FibFib' cont n -> Right $ go (FibFib' (ContFibOne n cont) (n - 2))
+    FibEval cont acc -> case cont of
+        ContFibOne n next ->
+          Right $ go (FibFib' (ContFibTwo acc next) (n - 1))
+        ContFibTwo a next ->
+          Right $ go (FibEval next ((+) <$> a <*> acc))
+        FibIdentity -> Left acc
+```
+
+Great, but actually, this isn't very elegant. Luckily for us, there exists a monad we can use to make this computation significantly more elegant, without having to apply defunctionalization.
+
+## The Trampoline Monad
+
+This is a great monad that builds on top of `Free`. If we look at the type of `Free`, `Free` really is building up a fixpoint computation.
+
+```purescript
+data Free f b
+  = Pure b
+  | Free (f (Free f b))
+```
+
+Here, `Pure` is our halting condition, and `Free` tells us to continue. The `Trampoline` monad is defined as follows:
+
+```purescript
+type Trampoline = Free ((->) Unit)
+```
+
+One of the great things about using monads, is that we can additionally take advantage of `do-notation`. Let's rewrite our `fib` function in terms of the `Trampoline` monad.
+
+```purescript
+-- we create a bunch of thunks of free, and then lift those into free
+suspend :: ∀ b. (Unit → Free ((->) Unit) b) → Free ((->) Unit) b
+suspend = join <<< delay
+
+-- probably the most concise - notice the do notation!
+fibTrampoline :: Int -> Maybe Int
+fibTrampoline n = runTrampoline (fib' n)
+  where
+  fib' 0 = suspend \_ -> pure $ Just 0
+  fib' 1 = suspend \_ -> pure $ Just 1
+  fib' x
+   | x < 0 = suspend \_ -> pure Nothing
+   | otherwise = suspend \_ -> do
+      a' <- fib' (x - 2)
+      b' <- fib' (x - 1)
+      pure ((+) <$> a' <*> b')
+```
+
+# Acknowledgements
+
 If you want to learn more, I highly recommend checking out on Nate Faubion's video on the subject. I was texting him mid-way through writing this asking why my stuff didn't work, and he put me on the right track.
 
 <iframe src="https://www.youtube.com/embed/yIfCePkImaU?si=hbytHGTjX-OrtibQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="margin-block: 2rem; width: calc(100vw - 4rem); max-width: 100%; height: auto; aspect-ratio: 16/9;"></iframe>
