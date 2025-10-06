@@ -318,7 +318,7 @@ fibTrampoline n = runTrampoline (fib' n)
       pure ((+) <$> a' <*> b')
 ```
 
-I noticed that `fibTrampoline` runs significantly slower than the hand-rolled `fixpoint` and defunctionalized CPS style functions, so that is something to keep in mind. As functional programmers, I think we tend to care more about correctness (in this case stack safety) than raw performance, but if you need to optimize the earlier techniques are something to keep in mind.
+I noticed that `fibTrampoline` runs slightly slower than the hand-rolled `fixpoint` and defunctionalized CPS style functions, so that is something to keep in mind. As functional programmers, I think we tend to care more about correctness (in this case stack safety) than raw performance, but if you need to optimize the earlier techniques are something to keep in mind.
 
 # Acknowledgements
 
