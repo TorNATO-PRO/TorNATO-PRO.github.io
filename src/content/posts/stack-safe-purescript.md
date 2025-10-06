@@ -139,4 +139,102 @@ foldrCPS fn acc lst = go lst FAContIdentity
       acc'
 ```
 
-Now you can run this. And boom! It works and doesn't blow up the stack.
+Now you can run this. And boom! It works and doesn't blow up the stack. Isn't that amazing? I promised in the beginning that I would show you how to do stack-safe operations over trees (or computations shaped as trees). Lets show how to do this same transformation over `fib`, or the naive implementation of computing the fibonacci number at some index `n`.
+
+```purescript
+-- naive implementation
+fib :: Int -> Maybe Int
+fib 0 = Just 0
+fib 1 = Just 1
+fib n = fib (n - 1) + fib (n - 2)
+```
+
+```purescript
+-- CPS fib
+fib :: Int -> Maybe Int
+fib n = fib' identity
+  where
+  fib' k 0 = k $ Just 0
+  fib' k 1 = k $ Just 1
+  fib' k n
+   | n < 0 = k Nothing
+   | otherwise =
+      fib'
+        (\a -> 
+          fib'
+            (\b ->
+              k $ (+) <$> a <*> b
+            ) (n - 1)
+        ) (n - 2)
+```
+
+```purescript
+-- CPS fib - explicit continuations
+fib :: Int -> Maybe Int
+fib = fib' identity
+  where
+  fib' k 0 = k $ Just 0
+  fib' k 1 = k $ Just 1
+  fib' k n
+   | n < 0 = k Nothing
+   | otherwise = fib' (contFibOne n k) (n - 2)
+    
+  contFibOne n cont = \a -> do
+    fib' (contFibTwo a cont) (n - 1)
+
+  contFibTwo a cont = \b ->
+    cont ((+) <$> a <*> b)
+```
+
+```purescript
+data FibKont
+  = ContFibOne Int FibKont
+  | ContFibTwo (Maybe Int) FibKont
+  | FibIdentity
+
+-- CPS fib - defunctionalization
+fib :: Int -> Maybe Int
+fib = fib' FibIdentity
+  where
+  fib' k 0 = eval k (Just 0)
+  fib' k 1 = eval k (Just 1)
+  fib' k n
+   | n < 0 = eval k Nothing
+   | otherwise = fib' (ContFibOne n k) (n - 2)
+
+  eval :: FibKont -> Maybe Int -> Maybe Int
+  eval cont acc = case cont of
+    ContFibOne n next ->
+      fib' (ContFibTwo acc next) (n - 1)
+    ContFibTwo x next ->
+      eval next ((+) <$> x <*> acc)
+    FibIdentity -> acc
+```
+
+```purescript
+-- now we need to turn mutually recursive fib', eval cals into a data type.
+
+data FibKont
+  = ContFibOne Int FibKont
+  | ContFibTwo (Maybe Int) FibKont
+  | FibIdentity
+
+fib :: Int -> Maybe Int
+fib x = go (FibFib' FibIdentity x)
+  where
+  go call = case call of
+    FibFib' cont 0 -> go (FibEval cont (Just 0))
+    FibFib' cont 1 -> go (FibEval cont (Just 1))
+    FibFib' cont n | n < 0 -> go (FibEval cont Nothing)
+    FibFib' cont n -> go (FibFib' (ContFibOne n cont) (n - 2))
+    FibEval cont acc -> case cont of
+        ContFibOne n next ->
+          go (FibFib' (ContFibTwo acc next) (n - 1))
+        ContFibTwo a next ->
+          go (FibEval next ((+) <$> a <*> acc))
+        FibIdentity -> acc
+
+data FibCall
+  = FibEval FibKont (Maybe Int)
+  | FibFib' FibKont Int
+```
