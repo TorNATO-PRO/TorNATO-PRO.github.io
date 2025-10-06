@@ -6,6 +6,8 @@ tags: ["purescript", "stack-safety", "tail-recursion", "continuation-passing-sty
 draft: false
 ---
 
+# NOTE - IN PROGRESS
+
 # Tail Recursion
 
 If you have experience programming, you might avoid writing recursive functions due to a fear of overloading the stack with function calls, and you might view recursion in general as more of a toy than something that you can use in your day job. **Tail recursion** is a solution to this problem. It is a technique that allows you, the programmer, to trade stack space for heap space by writing a recursive function such that on each branch, the recursive call is the final action. This transformation enables **tail-call optimization**, allowing such functions to execute without growing the call stack. However, not all languages implement tail-call optimizations, so this solution is not yet a panacea. You can add this technique to your toolbox for making stack safe functions.
