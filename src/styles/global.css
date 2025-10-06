@@ -58,34 +58,81 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
-/* Global styles  */
+/* ============================================
+   Global Design Tokens & Styles
+   ============================================ */
 
 :root {
-  /* colors */
-  --color-headline: oklch(0.3598 0.086 245.96);
-  --color-paragraph: oklch(0.5258 0.0285 252.09);
-  --color-background: oklch(0.995 0.01 106.42);
-  --color-link: oklch(0.7115 0.1551 245.97);
+  /* Color Palette - OKLCH for perceptual uniformity */
+  --color-headline: oklch(0.36 0.09 246);
+  --color-paragraph: oklch(0.53 0.03 252);
+  --color-background: oklch(0.995 0.01 106);
+  --color-link: oklch(0.71 0.16 246);
+  --color-surface: oklch(0.98 0.01 106);
 
-  /* fonts */
-  --heading-font: 'Manrope', sans-serif;
+  /* Typography */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Manrope', var(--font-sans);
 
-  /* Spacing */
-  --space: 0.5rem;
+  /* Spacing Scale - Based on 8px grid */
+  --space-xs: 0.25rem;   /* 4px */
+  --space-sm: 0.5rem;    /* 8px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+
+  /* Legacy support */
+  --space: var(--space-sm);
+  --heading-font: var(--font-display);
+
+  /* Animation & Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 }
 
-* {
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-weight: 300;
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-variation-settings: 
-    "wdth" 100;
-  background: var(--color-background);
+/* Base Styles */
+html {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  font-weight: 300;
+  background-color: var(--color-background);
+  color: var(--color-paragraph);
+}
+
+/* Focus Visible Styles - Better accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+/* Selection Styles */
+::selection {
+  background-color: oklch(0.71 0.16 246 / 0.2);
+  color: var(--color-headline);
 }
 
 /* When they prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

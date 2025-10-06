@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import './[...slug].css';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { title, description, publishDate, tags } = post.data;
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(publishDate);
+
+const pages = [
+  { href: "/Posts", pageName: "Posts" },
+  { href: "#projects", pageName: "Projects" },
+  { href: "#about", pageName: "About" }
+];
+---
+
+<Layout title={title} description={description}>
+  <Navbar pages={pages} />
+
+  <main class="post-page">
+    <article class="post-article">
+      <header class="post-header">
+        <div class="post-header__meta">
+          <a href="/Posts" class="post-header__back">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
+              <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
+            </svg>
+            Back to Posts
+          </a>
+
+          <time class="post-header__date" datetime={publishDate.toISOString()}>
+            {formattedDate}
+          </time>
+        </div>
+
+        <h1 class="post-header__title">{title}</h1>
+        <p class="post-header__description">{description}</p>
+
+        {tags && tags.length > 0 && (
+          <div class="post-header__tags">
+            {tags.map((tag: string) => (
+              <span class="post-header__tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <div class="post-content">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>

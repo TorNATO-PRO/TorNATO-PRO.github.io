@@ -1,18 +1,23 @@
-header {
-    --height: 4rem;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--height);
-    z-index: 10;
-    position: fixed;
+:root {
+    --navbar-height: 4rem;
+    --navbar-blur: 16px;
+}
 
-    color: var(--color-link);
-    text-decoration: none;
+.site-header {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline: 0;
+    block-size: var(--navbar-height);
+    z-index: 100;
     background: oklch(0.995 0.01 106.42 / 0.95);
 }
 
-.glass {
+.navbar {
+    position: relative;
+    block-size: 100%;
+}
+
+.navbar__glass {
     position: absolute;
     inset: 0;
     pointer-events: none;
@@ -22,40 +27,25 @@ header {
         oklch(1 0 106.42 / .55);
 }
 
-/*
-    This code gets applied for folks using
-    browsers that support backdrop-filter.
-  */
-@supports (backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px)) {
-    header {
+/* Glass morphism effect for modern browsers */
+@supports (backdrop-filter: blur(var(--navbar-blur))) {
+    .site-header {
         background: transparent;
     }
 
-    .glass {
-        position: absolute;
-        inset: 0;
-        /*
-        These prefixed properties are usually
-        added automatically by tooling:
-      */
-        -webkit-backdrop-filter: blur(16px);
-        backdrop-filter: blur(16px);
+    .navbar__glass {
+        -webkit-backdrop-filter: blur(var(--navbar-blur));
+        backdrop-filter: blur(var(--navbar-blur));
         background: linear-gradient(to bottom,
                 oklch(0.995 0.01 106.42),
                 transparent 50%);
-        pointer-events: none;
     }
 }
 
-/*
-    This code gets applied for folks using
-    browsers that support mask-image. This
-    adds the "consider near elements"
-    optimization discussed in this article.
-  */
-@supports (mask-image: none) or (-webkit-mask-image: none) {
-    .glass {
-        height: 200%;
+/* Performance optimization using mask-image */
+@supports (mask-image: linear-gradient(black, transparent)) {
+    .navbar__glass {
+        block-size: 200%;
         -webkit-mask-image: linear-gradient(to bottom,
                 black 0% 50%,
                 transparent 50% 100%);
@@ -65,170 +55,167 @@ header {
     }
 }
 
-.nav-shell {
+.navbar__content {
     position: relative;
-    height: 100%;
-}
-
-.nav-content {
-    position: relative;
-    background: none;
-    padding-inline: 1rem;
     display: flex;
     align-items: center;
-    width: 100%;
     justify-content: space-between;
-    height: var(--height);
-    gap: 0.75rem;
+    block-size: var(--navbar-height);
+    padding-inline: max(1rem, 3vw);
+    gap: 1rem;
 }
 
-.brand {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
+.navbar__brand {
     font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 600;
-    letter-spacing: 0.1rem;
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
     color: var(--color-headline);
-}
-
-.links {
-    display: flex;
-    gap: 0.5rem;
-    list-style: none;
-    margin: 0 0 0 auto;
-}
-
-.links a {
     text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.navbar__brand:hover,
+.navbar__brand:focus-visible {
+    color: var(--color-link);
+}
+
+.navbar__links {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    margin-inline-start: auto;
+    padding: 0;
+}
+
+.navbar__item {
+    display: contents;
+}
+
+.navbar__link {
+    display: block;
+    padding: 0.625rem 1rem;
     color: oklch(0.28 0.07 255);
     font-weight: 500;
-    padding: .5rem .75rem;
-    border-radius: 0.5rem;
-    transition: background-color .15s ease, transform .12s ease;
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
     line-height: 1;
-    letter-spacing: 0.03rem;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
 }
 
-.links a:hover,
-.links a:focus {
+.navbar__link:hover,
+.navbar__link:focus-visible {
     background-color: oklch(0.95 0.02 255 / 0.5);
     color: oklch(0.25 0.08 255);
-    cursor: pointer;
 }
 
-.menu {
+.navbar__toggle {
     display: none;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0.5rem;
+    color: var(--color-headline);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.menu svg {
+.navbar__toggle:hover,
+.navbar__toggle:focus-visible {
+    background-color: oklch(0.95 0.02 255 / 0.3);
+}
+
+.navbar__toggle svg {
     fill: currentColor;
     display: block;
 }
 
-@media (max-width:48rem) {
-    .links a {
-        letter-spacing: .01rem;
-    }
-}
-
+/* Mobile responsive styles */
 @media (max-width: 48rem) {
-    header {
-        --height: 4.5rem;
+    :root {
+        --navbar-height: 4.5rem;
     }
 
-    .brand {
-        font-size: 1.15rem;
-        letter-spacing: .05rem;
-        font-weight: 600;
+    .navbar__brand {
+        font-size: 1.125rem;
+        letter-spacing: 0.03em;
     }
 
-    .links {
+    .navbar__links {
         display: none;
     }
 
-    .menu {
+    .navbar__toggle {
         display: inline-grid;
-        place-items: center;
-        inline-size: 40px;
-        block-size: 40px;
-        background: transparent;
-        border: 0;
-        border-radius: 0.5rem;
-        color: var(--color-headline);
-        cursor: pointer;
     }
 
-
-    .links.open {
+    .navbar__links--open {
         position: absolute;
-        left: 1rem;
-        right: 1rem;
-        top: calc(100% + .5rem);
-        z-index: 20;
+        inset-inline: 1rem;
+        inset-block-start: calc(100% + 0.5rem);
+        z-index: 1000;
         display: grid;
         gap: 0.25rem;
-        list-style: none;
-        margin-inline: 1rem;
-        padding: 0.4rem;
-        margin: 0;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid hsl(0 0% 0% / .08);
-        border-radius: 0.9rem;
-        animation: dropdown-in 160ms ease-out;
-        background: oklch(1 0 106.42 / .55);
+        padding: 0.5rem;
+        border: 1px solid oklch(0 0 0 / 0.08);
+        border-radius: 1rem;
+        background: oklch(1 0 106.42 / 0.55);
+        -webkit-backdrop-filter: blur(var(--navbar-blur));
+        backdrop-filter: blur(var(--navbar-blur));
+        animation: slideDown 200ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .links.open li {
-        margin: 0;
-        background: transparent;
-    }
-
-    .links.open a {
+    .navbar__links--open .navbar__item {
         display: block;
-        width: 100%;
-        padding: 0.85rem 1rem;
-        letter-spacing: 0.01rem;
-        font-weight: 500;
-        transition: background-color .15s ease, transform .12s ease;
-        line-height: 1.2;
-        text-decoration: none;
-        background: transparent;
+    }
+
+    .navbar__links--open .navbar__link {
+        inline-size: 100%;
+        padding: 0.875rem 1rem;
+        letter-spacing: 0.005em;
         color: var(--color-headline);
     }
 
-    .links.open a:hover {
+    .navbar__links--open .navbar__link:hover,
+    .navbar__links--open .navbar__link:focus-visible {
         background-color: oklch(0.95 0.02 255 / 0.5);
         color: oklch(0.25 0.08 255);
-        cursor: pointer;
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .links.open {
-        transition: none;
-        animation: none;
-    }
-}
-
-@keyframes dropdown-in {
+@keyframes slideDown {
     from {
         opacity: 0;
-        transform: translateY(-6px) scale(.98);
+        transform: translateY(-0.5rem) scale(0.98);
     }
-
     to {
         opacity: 1;
-        transform: none;
+        transform: translateY(0) scale(1);
     }
 }
 
-@media (prefers-reduced-transparency: reduce) {
+/* Accessibility: Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .navbar__links--open {
+        animation: none;
+    }
 
-    .glass,
-    .links.open {
+    .navbar__link,
+    .navbar__brand,
+    .navbar__toggle {
+        transition: none;
+    }
+}
+
+/* Accessibility: Respect user transparency preferences */
+@media (prefers-reduced-transparency: reduce) {
+    .navbar__glass,
+    .navbar__links--open {
         -webkit-backdrop-filter: none;
         backdrop-filter: none;
         background: oklch(0.995 0.01 106.42);

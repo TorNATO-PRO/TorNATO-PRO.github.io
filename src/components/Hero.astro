@@ -10,15 +10,17 @@ const subtitleHtml = subtitle.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     aria-labelledby="hero-title"
     aria-describedby="hero-subtitle"
 >
-    <div class="header">
+    <div class="hero__content">
         <img
+            class="hero__logo"
             src={imageLink}
-            alt=""
-            style="max-height: 400px;"
+            alt="Nathan Waltz logo"
+            width="400"
+            height="400"
             decoding="async"
             fetchpriority="high"
         />
-        <h1 id="hero-title" class="title">{heading}</h1>
-        <p id="hero-subtitle" class="subtitle" set:html={subtitleHtml}></p>
+        <h1 id="hero-title" class="hero__title">{heading}</h1>
+        <p id="hero-subtitle" class="hero__subtitle" set:html={subtitleHtml} />
     </div>
 </section>

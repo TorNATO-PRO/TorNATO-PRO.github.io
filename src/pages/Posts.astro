@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import PostCard from '../components/PostCard.astro';
+import "./Posts.css";
+
+const allPosts = await getCollection('posts');
+const publishedPosts = allPosts
+  .filter((post: CollectionEntry<'posts'>) => !post.data.draft)
+  .sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+
+const pages = [
+  { href: "/Posts", pageName: "Posts" },
+  { href: "#projects", pageName: "Projects" },
+  { href: "#about", pageName: "About" }
+];
+
+const title = "Posts - Nathan Waltz";
+const description = "Thoughts on functional programming, PL, static analysis, and more!";
+---
+
+<Layout title={title} description={description}>
+  <Navbar pages={pages} />
+
+  <main class="posts-page">
+    <div class="posts-container">
+      <header class="posts-header">
+        <h1 class="posts-title">Posts</h1>
+        <p class="posts-description">
+          Exploring functional programming, programming languages, static analysis, and software engineering.
+        </p>
+      </header>
+
+      {publishedPosts.length > 0 ? (
+        <div class="posts-grid">
+          {publishedPosts.map((post: any) => (
+            <PostCard post={post} />
+          ))}
+        </div>
+      ) : (
+        <div class="posts-empty">
+          <p>No posts yet. Check back soon!</p>
+        </div>
+      )}
+    </div>
+  </main>
+</Layout>

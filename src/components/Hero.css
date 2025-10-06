@@ -1,42 +1,53 @@
 :root {
-  --title-size: clamp(1.75rem, 4vw + 0.5rem, 3rem);
-  --subtitle-size: clamp(1rem, 1.2vw + 0.9rem, 1.25rem);
-  --measure: 60ch;
+  --hero-title-size: clamp(2rem, 5vw + 0.5rem, 3.5rem);
+  --hero-subtitle-size: clamp(1.125rem, 1.5vw + 0.9rem, 1.5rem);
+  --hero-content-max-width: 80rem;
+  --hero-text-measure: 60ch;
 }
 
 .hero {
-    height: 100svh;
-    background: var(--color-background);
-    padding-inline: calc(2 * var(--space));
-    padding-block: calc(3 * var(--space));
+    min-height: 100svh;
     display: grid;
     place-content: center;
+    padding-inline: max(var(--space), 5vw);
+    padding-block: calc(6 * var(--space));
 }
 
-.hero .header {
+.hero__content {
     display: grid;
     justify-items: center;
-    gap: calc(3 * var(--space));
-    max-width: 80rem;
+    gap: calc(2 * var(--space));
+    max-width: var(--hero-content-max-width);
     margin-inline: auto;
 }
 
-.hero .title {
+.hero__logo {
+    max-inline-size: min(400px, 80vw);
+    block-size: auto;
+    aspect-ratio: 1;
+}
+
+.hero__title {
     color: var(--color-headline);
-    margin: 0;
-    font-size: var(--title-size);
+    font-size: var(--hero-title-size);
     font-family: var(--heading-font);
     font-weight: 700;
     text-align: center;
     line-height: 1.15;
+    letter-spacing: -0.02em;
 }
 
-.hero .subtitle {
+.hero__subtitle {
     color: var(--color-paragraph);
     font-weight: 500;
-    font-size: var(--subtitle-size);
+    font-size: var(--hero-subtitle-size);
     font-family: var(--heading-font);
-    margin: 0;
-    max-width: min(var(--measure), 90vw);
+    max-inline-size: min(var(--hero-text-measure), 90vw);
     text-align: center;
+    line-height: 1.5;
+}
+
+.hero__subtitle strong {
+    color: var(--color-headline);
+    font-weight: 600;
 }
