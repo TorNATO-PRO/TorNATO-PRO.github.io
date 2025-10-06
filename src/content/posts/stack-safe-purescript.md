@@ -48,7 +48,7 @@ Great, now our function is stack safe? Now lets try running the code on a large 
 
 ```
 > foldrCPS (\x xs -> x + xs) 0 $ List.range 0 100000
-file:///Users/nathanwaltz/Documents/Work/Development/reporting/.psci_modules/$PSCI/index.js:5
+file:///Users/nathanwaltz/Documents/Prototype/.psci_modules/$PSCI/index.js:5
 var it = /* #__PURE__ */ Rose["foldr$prime$prime"](function (x) {
                                                             ^
 
