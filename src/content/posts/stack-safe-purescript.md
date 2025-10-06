@@ -10,7 +10,7 @@ draft: false
 
 # Tail Recursion
 
-If you have experience programming, you might avoid writing recursive functions due to a fear of overloading the stack with function calls, and you might view recursion in general as more of a toy than something that you can use in your day job. **Tail recursion** is a solution to this problem. It is a technique that allows you, the programmer, to trade stack space for heap space by writing a recursive function such that on each branch, the recursive call is the final action. This transformation enables **tail-call optimization**, allowing such functions to execute without growing the call stack. However, not all languages implement tail-call optimizations, so this solution is not yet a panacea. You can add this technique to your toolbox for making stack safe functions.
+If you have experience programming, you might avoid writing recursive functions due to a fear of overloading the stack with function calls, and you might view recursion in general as more of a toy than something that you can use in your day job. **Tail recursion** is a solution to this problem. It is a technique that allows you, the programmer, to trade stack space for heap space by writing a recursive function such that on each branch, the self-recursive call is the final action (first-order). This transformation enables **tail-call optimization**, allowing such functions to execute without growing the call stack. However, not all languages implement tail-call optimizations, so this solution is not yet a panacea. You can add this technique to your toolbox for making stack safe functions.
 
 ```purescript
 -- CANNOT TCO
@@ -100,57 +100,43 @@ foldrCPS' fn acc lst = tailRec go (State { lst, k: Done })
   go (State { lst: Cons x xs, k }) = Loop (State { lst: xs, k: \res -> k (fn x res) })
 ```
 
-Now lets run it! Anddddd still the same problem. Well great, so it turns out that we are still building up a massive continuation. Once it was actually evaluated, we still ended up having to do all of the function calls. It turns out, CPS didn't help us here for creating a function that didn't blow up the stack. There are other more clever ways to rewrite this function to not blow up the stack, but it is a little disappointing that this technique didn't work.
+Now lets run it! Anddddd still the same problem. Well great, so it turns out that we are still building up a massive continuation. Once it was actually evaluated, we still ended up having to do all of the function calls and the closure of callbacks doesn't get turned into a loop. It turns out that tailRec isn't necessarily foolproof.
 
-Let me show you something that does work.
+# Defunctionalization
+
+Defunctionalization is a transformation which eliminates higher order functions and replaces them with a single order apply function [source](https://en.wikipedia.org/wiki/Defunctionalization). It turns out that by doing this, we can obtain stack safety. And since our functions are already in CPS, it is trivial. We just need to explicitly state our continuations, and then have a small step `eval` function that can evaluate these continuations. Here is an example, because reading that paragraph I just wrote I would be totally lost.
 
 ```purescript
--- naive CPS conversion
--- fib :: Int -> Maybe Int
--- fib = fib' identity
---   where
---   fib' k 0 = k $ Just 0
---   fib' k 1 = k $ Just 1
---   fib' k n
---    | n < 0 = k Nothing
---    | otherwise =
---       fib'
---         (\a -> 
---           fib'
---             (\b ->
---               k $ (+) <$> a <*> b
---             ) (n - 1)
---         ) (n - 2)
-
--- purescript compiler is stupid, so
--- I have to do this
-
-newtype State = State
-  { k :: Maybe Int -> Step State (Maybe Int)
-  , val :: Int
-  }
-
-fib :: Int -> Maybe Int
-fib n = tailRec go (State { k: Done, val: n })
+-- making the continuation explicit
+foldrCPS'' :: ∀ a b. (a -> b -> b) -> b -> List a -> b
+foldrCPS'' fn acc lst = go lst identity
   where
-  go :: State -> Step State (Maybe Int)
-  go (State s) =
-    case s.val of
-      x | x < 0  -> s.k Nothing
-      0 -> s.k (Just 0)
-      1 -> s.k (Just 1)
-      x ->
-        Loop
-          ( State
-              { k: \a ->
-                  Loop
-                    ( State
-                        { k: \b ->
-                            s.k ((+) <$> a <*> b)
-                        , val: x - 1
-                        }
-                    )
-              , val: x - 2
-              }
-          )
+  go Nil k = k acc
+  go (Cons x xs) k = go xs (goCont x k)
+
+  goCont currentValue kont = \res ->
+    kont (fn currentValue res)
 ```
+
+```purescript
+-- encode both the goCont and the identity function as data
+data FoldAccum a b
+  = FoldCont a (FoldAccum a b)
+  | FAContIdentity
+
+foldrCPS :: ∀ a b. (a -> b -> b) -> b -> List a -> b
+foldrCPS fn acc lst = go lst FAContIdentity
+  where
+  go Nil k = eval k acc
+  go (Cons x xs) k = go xs (FoldCont x k)
+
+  -- small step evaluation
+  eval cont acc' = case cont of
+    FoldCont a next -> do
+      let result = fn a acc'
+      eval next result
+    FAContIdentity ->
+      acc'
+```
+
+Now you can run this. And boom! It works and doesn't blow up the stack.
