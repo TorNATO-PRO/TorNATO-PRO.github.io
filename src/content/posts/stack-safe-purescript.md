@@ -301,7 +301,7 @@ One of the great things about using monads, is that we can additionally take adv
 
 ```purescript
 -- we create a bunch of thunks of free, and then lift those into free
-suspend :: ∀ b. (Unit → Free ((->) Unit) b) → Free ((->) Unit) b
+suspend :: ∀ b. (Unit -> Free ((->) Unit) b) → Free ((->) Unit) b
 suspend = join <<< delay
 
 -- probably the most concise - notice the do notation!
