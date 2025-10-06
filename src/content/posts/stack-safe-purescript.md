@@ -210,7 +210,13 @@ fib = fib' FibIdentity
 ```
 
 ```purescript
--- now we need to turn mutually recursive fib', eval calls into a data type.
+-- now we need to turn mutually recursive fib', eval calls
+-- into a data type. This is great because we can now do small step
+-- evaluation, and go is always in the tail position. We are forcing heap
+-- allocations with the explicit FibCall and FibKont ADTs. These heap
+-- allocations are what we are trading stack allocations for,
+-- and we get small step evaluation of a tree-shaped recursive function.
+-- Recursion thus becomes iteration!
 
 data FibKont
   = ContFibOne Int FibKont
