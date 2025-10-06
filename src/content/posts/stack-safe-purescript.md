@@ -59,7 +59,7 @@ Well, that’s not great. Was this entire post a lie? Not exactly. This is exact
 
 ## tailrec
 
-Luckily for us, Phil Freeman has written a type class in a library called [tailrec](https://pursuit.purescript.org/packages/purescript-tailrec/6.1.0), which "captures stack-safe monadic tail recursion". As PureScript programmers, we can use this type class to force stack-safe evaluation by rewriting self-recursive computations in a way that PureScript can compile to Javascript in a stack safe manner. 
+Luckily for us, [Phil Freeman](https://functorial.com/) has written a type class in a library called [tailrec](https://pursuit.purescript.org/packages/purescript-tailrec/6.1.0), which "captures stack-safe monadic tail recursion". As PureScript programmers, we can use this type class to force stack-safe evaluation by rewriting self-recursive computations in a way that PureScript can compile to Javascript in a stack safe manner. 
 
 Now let's look at the function signature for `tailRec`, which "creates a pure tail-recursive function of one argument".
 
