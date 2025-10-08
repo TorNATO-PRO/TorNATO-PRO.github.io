@@ -1,5 +1,5 @@
 ---
-title: "Stack-Safe PureScript"
+title: "Stack Safety for Free"
 description: "Functions over lists, in general, are quite easy to make stack safe. However, how does one make stack safe computations over a tree, or a computation that builds up a tree?"
 publishDate: 2025-10-05
 tags: ["purescript", "stack-safety", "tail-recursion", "continuation-passing-style"]
